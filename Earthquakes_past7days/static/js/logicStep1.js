@@ -29,8 +29,8 @@ let baseMaps = {
 
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
-	center: [30, 30],
-	zoom: 2,
+	center: [39.5, -98.5],
+	zoom: 3,
 	layers: [streets]
 })
 
@@ -38,11 +38,13 @@ let map = L.map('mapid', {
 L.control.layers(baseMaps).addTo(map);
 
 // Accessing the airport GeoJSON URL
-let torNeighborhoods = "https://raw.githubusercontent.com/ndxn/Mapping_Earthquakes/master/torontoNeighborhoods.json";
+let torNeighborhoods = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
 let myStyle = {
     color: "#ffffa1",
-    weight: 2
+    weight: 1,
+    opacity: 0.8,
+    fillOpacity: 0.3
 };
 
 // Grabbing our GeoJSON data using D3
@@ -52,9 +54,9 @@ d3.json(torNeighborhoods).then(function(data) {
     L.geoJson(data).addTo(map);
     // L.geoJson(data, {
     //     style: myStyle,
-    //     onEachFeature: function(feature, layer) {
-    //       layer.bindPopup("<h3>Airline: " + feature.properties.airline + "</h3> <hr><h3></h3>Destination: " + feature.properties.dst + "</h3> ");
-    //      }
+    //     // onEachFeature: function(feature, layer) {
+    //     //   layer.bindPopup("<h3>Airline: " + feature.properties.airline + "</h3> <hr><h3></h3>Destination: " + feature.properties.dst + "</h3> ");
+    //     //  }
     //   })
     // .addTo(map);
 });
